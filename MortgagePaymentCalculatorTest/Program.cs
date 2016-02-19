@@ -34,18 +34,19 @@ namespace MortgagePaymentCalculatorTest
         public void ShouldClickOnLoans()
         {
 
-            Driver.Navigate().GoToUrl("http://ia.ca");
+            Driver.Navigate().GoToUrl("http://ia.ca/individuals");
             Driver.Manage().Window.Maximize();
 
-            var waitForEnglish = new WebDriverWait(Driver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.CssSelector(".test:contains('Loans')"))));
+            //var waitForEnglish = new WebDriverWait(Driver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementIsVisible((By.CssSelector("#nav-secondaire > div.navbar-sub-main > ul > li.dropdown.Pret.three-items > a > span"))));
 
 
-            Driver.FindElement(By.CssSelector(".test")).Click();
-            Driver.FindElement(By.CssSelector("a[href*='/mortgages']")).Click();
-
+            Driver.FindElement(By.XPath("//*[@id=\"nav-secondaire\"]/div[1]/ul/li[4]/a/span")).Click();
+            Driver.FindElement(By.XPath("//*[@id=\"nav-secondaire\"]/div[1]/ul/li[4]/ul/li[1]/section/ul/li[1]/a")).Click();
+            Driver.FindElement(By.XPath("//*[@id=\"main\"]/div[2]/div[4]/div[1]/div[2]/a")).Click();
             Thread.Sleep(5000);
 
         }
+
 
         public static void Main(string[] args)
         {

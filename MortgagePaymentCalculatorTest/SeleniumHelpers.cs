@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
 namespace MortgagePaymentCalculatorTest
 {
     public abstract class SeleniumHelpers
     {
-        protected readonly IWebDriver driver;
+        protected IWebDriver driver;
 
         protected SeleniumHelpers(IWebDriver driver)
         {
@@ -36,7 +37,7 @@ namespace MortgagePaymentCalculatorTest
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(120));
             //wait.Until(x => VisibleAndEnabled(x.FindElement(by)));
-
+            //wait.Until(x => x.)
             return Find(by);
         }
     }

@@ -37,12 +37,25 @@ namespace MortgagePaymentCalculatorTest
             Driver.Manage().Window.Maximize();
         }
 
-        public void WaitUntilEnglish(int timeOut)
+        public void WaitUntilEnglish(int timeOut, string language)
         {
             // find topLangMenuItem using Driver.FindElement and wait 5 seconds until value of this element is FR
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut)).Until(ExpectedConditions.TextToBePresentInElement(Driver.FindElement(By.CssSelector("#topLangMenuItem > span")), "FR"));
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut)).Until(ExpectedConditions.TextToBePresentInElement(Driver.FindElement(By.CssSelector("#topLangMenuItem > span")), language));
         }
 
+        public void ChangeToLanguageSite(string language)
+        {
+            var currentLanguageButton = Driver.FindElement(By.CssSelector("#topLangMenuItem > span"));
+            var currentLanguageButtonValue = currentLanguageButton.Text.Trim();
+
+            if (language.ToLower() == currentLanguageButtonValue.ToLower())
+            {
+                currentLanguageButton.Click();
+                new WebDriverWait(Driver, TimeSpan.FromSeconds(TimeOut)).Until(ExpectedConditions.TextToBePresentInElement(Driver.FindElement(By.CssSelector("#topLangMenuItem > span")), (language.ToLower() == "en" ? "FR" : "EN")));
+
+            }
+
+        }
     }
 }
 

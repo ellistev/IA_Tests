@@ -1,6 +1,3 @@
-C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\chromedriver.exe
-C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\MortgagePaymentCalculatorTest.exe.config
-C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\MortgagePaymentCalculatorTest.exe
 C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\MortgagePaymentCalculatorTest.pdb
 C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\nunit.framework.dll
 C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\WebDriver.dll
@@ -8,6 +5,8 @@ C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\WebDr
 C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\nunit.framework.xml
 C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\WebDriver.xml
 C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\WebDriver.Support.xml
-C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\obj\Debug\MortgagePaymentCalculatorTest.exe
 C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\obj\Debug\MortgagePaymentCalculatorTest.pdb
-C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\obj\Debug\MortgagePaymentCalculatorTest.csprojResolveAssemblyReference.cache
+C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\chromedriver.exe
+C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\MortgagePaymentCalculatorTest.dll.config
+C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\MortgagePaymentCalculatorTest.dll
+C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\obj\Debug\MortgagePaymentCalculatorTest.dll

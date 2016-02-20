@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{84835039-FA9F-41BC-9D07-6C25752FF760}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MortgagePaymentCalculatorTest</RootNamespace>
     <AssemblyName>MortgagePaymentCalculatorTest</AssemblyName>
@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework">
       <HintPath>packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
@@ -51,11 +54,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAMortgagePaymentCalculatorPage.cs" />
-    <Compile Include="IAMortgagesPage.cs" />
-    <Compile Include="IAHomePage.cs" />
-    <Compile Include="Page.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Pages\IAMortgagePaymentCalculatorPage.cs" />
+    <Compile Include="Pages\IAMortgagesPage.cs" />
+    <Compile Include="Pages\IAHomePage.cs" />
+    <Compile Include="Pages\Page.cs" />
+    <Compile Include="IAMortgageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

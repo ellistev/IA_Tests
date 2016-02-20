@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 
 namespace MortgagePaymentCalculatorTest
@@ -14,11 +15,11 @@ namespace MortgagePaymentCalculatorTest
     public class MortgagePaymentCalculatorTests
     {
         public IWebDriver Driver { get; private set; }
-        public const int timeOut = 10;
+        public const int TimeOut = 10;
+
         [SetUp]
         public virtual void Setup()
         {
-
             var options = new ChromeOptions();
             options.AddArgument("--disable-extensions");
             Driver = new ChromeDriver(options);
@@ -34,35 +35,40 @@ namespace MortgagePaymentCalculatorTest
         [Test]
         public void ShouldClickOnLoans()
         {
-
-            Driver.Navigate().GoToUrl("http://ia.ca/");
-            Driver.Manage().Window.Maximize();
+            IAHomePage iaHomePage = new IAHomePage(Driver);
+            iaHomePage.OpenPage();
 
             // find topLangMenuItem using Driver.FindElement and wait 5 seconds until value of this element is FR
-            var waitForEnglish = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut)).Until(ExpectedConditions.TextToBePresentInElement(Driver.FindElement(By.CssSelector("#topLangMenuItem > span")), "FR"));
-            //Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
+            iaHomePage.WaitUntilEnglish(TimeOut);
 
             // Click the "Loans" drop down menu 
-            Driver.FindElement(By.XPath("//*[@id=\"nav-secondaire\"]/div[1]/ul/li[4]/a/span")).Click();
+            iaHomePage.ClickItem(iaHomePage.LoansMenuItem);
+
             // Click the "Mortgages" button
-            Driver.FindElement(By.XPath("//*[@id=\"nav-secondaire\"]/div[1]/ul/li[4]/ul/li[1]/section/ul/li[1]/a")).Click();
+            iaHomePage.ClickItem(iaHomePage.LoanSubmenuMortgagesItem);
+
             // Click the "Calculate your payments" button
-            Driver.FindElement(By.XPath("//*[@id=\"main\"]/div[2]/div[4]/div[1]/div[2]/a")).Click();
+            IAMortgagesPage iaMortgagesPage = new IAMortgagesPage(Driver);
+            iaMortgagesPage.ClickItem(iaMortgagesPage.CalculatePaymentsButton);
 
-            // todo Drag the "Purchase Price" slider to verify that it is working. Include an assertion
+            //Drag the "Purchase Price" slider to verify that it is working. Include an assertion
+            IAMortgagePaymentCalculatorPage iaMortgagePaymentCalculatorPage = new IAMortgagePaymentCalculatorPage(Driver);
 
-            SetSliderPercentage("//*[@id=\"form_calculateur_versements\"]/div[2]/div/div[2]/div/div[1]/div[9]",
-                "//*[@id=\"form_calculateur_versements\"]/div[2]/div/div[2]/div/div[1]", 0);
+            iaMortgagePaymentCalculatorPage.SetSliderPercentage(iaMortgagePaymentCalculatorPage.PurchasePriceSliderHandle,
+                iaMortgagePaymentCalculatorPage.PurchasePriceSliderTrack, 0);
+
             IWebElement mortgageSliderValue = Driver.FindElement(By.Id("PrixPropriete"));
             Assert.AreEqual("0", mortgageSliderValue.GetAttribute("value"));
 
-            SetSliderPercentage("//*[@id=\"form_calculateur_versements\"]/div[2]/div/div[2]/div/div[1]/div[9]", 
-                "//*[@id=\"form_calculateur_versements\"]/div[2]/div/div[2]/div/div[1]", 25);
+            iaMortgagePaymentCalculatorPage.SetSliderPercentage(iaMortgagePaymentCalculatorPage.PurchasePriceSliderHandle,
+                iaMortgagePaymentCalculatorPage.PurchasePriceSliderTrack, 25);
+
             mortgageSliderValue = Driver.FindElement(By.Id("PrixPropriete"));
             Assert.AreNotEqual("0", mortgageSliderValue.GetAttribute("value"));
 
-            SetSliderPercentage("//*[@id=\"form_calculateur_versements\"]/div[2]/div/div[2]/div/div[1]/div[9]", 
-                "//*[@id=\"form_calculateur_versements\"]/div[2]/div/div[2]/div/div[1]", 0);
+            iaMortgagePaymentCalculatorPage.SetSliderPercentage(iaMortgagePaymentCalculatorPage.PurchasePriceSliderHandle,
+                iaMortgagePaymentCalculatorPage.PurchasePriceSliderTrack, 0);
+
             mortgageSliderValue = Driver.FindElement(By.Id("PrixPropriete"));
             Assert.AreEqual("0", mortgageSliderValue.GetAttribute("value"));
 
@@ -131,7 +137,7 @@ namespace MortgagePaymentCalculatorTest
 
         private void WaitUntilElementTextHasChanged(By elementToWaitFor, string originalValue)
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut));
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(TimeOut));
             wait.Until<IWebElement>((d) =>
             {
                 IWebElement element = Driver.FindElement(elementToWaitFor);
@@ -152,25 +158,7 @@ namespace MortgagePaymentCalculatorTest
             interestRate.SendKeys(interestRateValue);
         }
 
-        public void SetSliderPercentage(string sliderHandleXpath, string sliderTrackXpath, int percentage)
-        {
-            var sliderHandle = Driver.FindElement(By.XPath(sliderHandleXpath));
-            var sliderTrack = Driver.FindElement(By.XPath(sliderTrackXpath));
-            var width = int.Parse(sliderTrack.GetCssValue("width").Replace("px", ""));
-            int dx = 0;
-            if (percentage == 0)
-            {
-                dx = -5000;
-            }
-            else
-            {
-                dx = (int)(percentage / 100.0 * width);
-            }
-            new Actions(Driver)
-                        .DragAndDropToOffset(sliderHandle, dx, 0)
-                        .Build()
-                        .Perform();
-        }
+
 
 
         public static void Main(string[] args)

@@ -16,15 +16,29 @@ namespace MortgagePaymentCalculatorTest
  
         protected IWebDriver Driver;
 
-        public By PurchasePriceSliderHandle
-        {
-            get { return By.XPath("//*[@id=\"form_calculateur_versements\"]/div[2]/div/div[2]/div/div[1]/div[9]"); }
-        }
+        public By PurchasePriceSliderHandle { get { return By.XPath("//*[@id=\"form_calculateur_versements\"]/div[2]/div/div[2]/div/div[1]/div[9]"); } }
 
-        public By PurchasePriceSliderTrack
-        {
-            get { return By.XPath("//*[@id=\"form_calculateur_versements\"]/div[2]/div/div[2]/div/div[1]"); }
-        }
+        public By PurchasePriceSliderTrack { get { return By.XPath("//*[@id=\"form_calculateur_versements\"]/div[2]/div/div[2]/div/div[1]"); } }
+
+        public string PurchasePrice { get { return Driver.FindElement(By.Id("PrixPropriete")).GetAttribute("value"); } }
+
+        public By PurchasePricePlusButton { get { return By.Id("PrixProprietePlus"); } }
+
+        public By DownPaymentPlusButton { get { return By.Id("MiseDeFondPlus"); } }
+
+        public string DownPaymentValue { get { return Driver.FindElement(By.Id("MiseDeFond")).GetAttribute("value"); } }
+
+        public By AmortizationDropDown { get { return By.Id("Amortissement"); }  }
+
+        public By FrequencyDropDown { get { return By.Id("FrequenceVersement"); } }
+
+        public By InterestRateField { get { return By.Id("TauxInteret"); } }
+
+        public string EstimatedPaymentAmount { get { return Driver.FindElement(EstimatedPayment).Text; } } 
+
+        public By EstimatedPayment { get { return By.Id("paiement-resultats"); } }
+
+        public By CalculateButton { get { return By.Id("btn_calculer");  } }
 
         public IAMortgagePaymentCalculatorPage(IWebDriver driver)
             : base(driver)
@@ -38,6 +52,8 @@ namespace MortgagePaymentCalculatorTest
             Driver.Navigate().GoToUrl("https://ia.ca/mortgage-payment-calculator");
             Driver.Manage().Window.Maximize();
         }
+
+
     }
 }
 

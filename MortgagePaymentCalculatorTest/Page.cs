@@ -13,6 +13,7 @@ namespace MortgagePaymentCalculatorTest
     public class Page
     {
         protected IWebDriver Driver;
+        public const int TimeOut = 10;
 
         public Page(IWebDriver driver)
         {
@@ -29,11 +30,30 @@ namespace MortgagePaymentCalculatorTest
             Driver.FindElement(byItem).Click();
         }
 
+        public void SubmitItem(By byItem)
+        {
+            Driver.FindElement(byItem).Submit();
+        }
+
+        public void SelectDropDownValue(By selectionElement, string selectionValue)
+        {
+            IWebElement comboBox = (Driver.FindElement(selectionElement));
+            SelectElement selectionObject = new SelectElement(comboBox);
+            selectionObject.SelectByText(selectionValue);
+        }
+
+        public void SetFieldValue(By field, string valueToSet)
+        {
+            IWebElement element = Driver.FindElement(field);
+            element.Clear();
+            element.SendKeys(valueToSet);
+        }
+
         public void SetSliderPercentage(By sliderHandleXpath, By sliderTrackXpath, int percentage)
         {
             var sliderHandle = Driver.FindElement(sliderHandleXpath);
             var sliderTrack = Driver.FindElement(sliderTrackXpath);
-            var width = int.Parse(sliderTrack.GetCssValue("width").Replace("px", ""));
+            var width = Int32.Parse(sliderTrack.GetCssValue("width").Replace("px", ""));
             int dx = 0;
             if (percentage == 0)
             {
@@ -47,6 +67,21 @@ namespace MortgagePaymentCalculatorTest
                         .DragAndDropToOffset(sliderHandle, dx, 0)
                         .Build()
                         .Perform();
+        }
+
+        public void WaitUntilElementTextHasChanged(By elementToWaitFor, string originalValue)
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(TimeOut));
+            wait.Until<IWebElement>((d) =>
+            {
+                IWebElement element = Driver.FindElement(elementToWaitFor);
+                if (element.Text != originalValue)
+                {
+                    return element;
+                }
+
+                return null;
+            });
         }
     }
 }

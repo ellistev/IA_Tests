@@ -10,3 +10,4 @@ C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\chrom
 C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\MortgagePaymentCalculatorTest.dll.config
 C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\bin\Debug\MortgagePaymentCalculatorTest.dll
 C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\obj\Debug\MortgagePaymentCalculatorTest.dll
+C:\Users\selliott\Desktop\IA_Tests\MortgagePaymentCalculatorTest\obj\Debug\MortgagePaymentCalculatorTest.csprojResolveAssemblyReference.cache

@@ -33,6 +33,24 @@ namespace MortgagePaymentCalculatorTest
 
         [TestCase("15 years", "weekly", "$ 836.75", "$ 732.70")]
         [TestCase("15 years", "Biweekly", "$ 1,674.30", "$ 1,465.83")]
+        [TestCase("15 years", "Biweekly +", "$ 1,815.84", "$ 1,589.04")]
+        [TestCase("15 years", "weekly +", "$ 907.92", "$ 794.52")]
+        [TestCase("15 years", "Monthly", "$ 3,631.67", "$ 3,178.08")]
+        [TestCase("20 years", "weekly", "$ 697.67", "$ 588.20")]
+        [TestCase("20 years", "Biweekly", "$ 1,396.00", "$ 1,176.74")]
+        [TestCase("20 years", "Biweekly +", "$ 1,514.02", "$ 1,275.65")]
+        [TestCase("20 years", "weekly +", "$ 757.01", "$ 637.82")]
+        [TestCase("20 years", "Monthly", "$ 3,028.03", "$ 2,551.30")]
+        [TestCase("25 years", "weekly", "$ 617.49", "$ 502.76")]
+        [TestCase("25 years", "Biweekly", "$ 1,235.57", "$ 1,005.81")]
+        [TestCase("25 years", "Biweekly +", "$ 1,340.02", "$ 1,090.36")]
+        [TestCase("25 years", "weekly +", "$ 670.01", "$ 545.18")]
+        [TestCase("25 years", "Monthly", "$ 2,680.04", "$ 2,180.72")]
+        [TestCase("30 years", "weekly", "$ 566.62", "$ 446.84")]
+        [TestCase("30 years", "Biweekly", "$ 1,133.78", "$ 893.93")]
+        [TestCase("30 years", "Biweekly +", "$ 1,229.62", "$ 969.07")]
+        [TestCase("30 years", "weekly +", "$ 614.81", "$ 484.54")]
+        [TestCase("30 years", "Monthly", "$ 2,459.25", "$ 1,938.14")]
 
         public void ShouldClickOnLoans(string amortization, string frequency, string paymentAt5, string paymentAt3)
         {

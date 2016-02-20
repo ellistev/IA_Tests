@@ -31,8 +31,10 @@ namespace MortgagePaymentCalculatorTest
             Driver.Quit();
         }
 
-        [Test]
-        public void ShouldClickOnLoans()
+        [TestCase("15 years", "weekly", "$ 836.75", "$ 732.70")]
+        [TestCase("15 years", "Biweekly", "$ 1,674.30", "$ 1,465.83")]
+
+        public void ShouldClickOnLoans(string amortization, string frequency, string paymentAt5, string paymentAt3)
         {
             IAHomePage iaHomePage = new IAHomePage(Driver);
             iaHomePage.OpenPage();
@@ -86,23 +88,22 @@ namespace MortgagePaymentCalculatorTest
             Assert.AreEqual("50000", iaMortgagePaymentCalculatorPage.DownPaymentValue);
 
             //Change the "Amortization" term drop down to 15 years
-            iaMortgagePaymentCalculatorPage.SelectDropDownValue(iaMortgagePaymentCalculatorPage.AmortizationDropDown, "15 years");
+            iaMortgagePaymentCalculatorPage.SelectDropDownValue(iaMortgagePaymentCalculatorPage.AmortizationDropDown, amortization);
 
             // Change the "Payment frequency" to weekly
-            iaMortgagePaymentCalculatorPage.SelectDropDownValue(iaMortgagePaymentCalculatorPage.FrequencyDropDown, "weekly");
+            iaMortgagePaymentCalculatorPage.SelectDropDownValue(iaMortgagePaymentCalculatorPage.FrequencyDropDown, frequency);
 
             // Change the "Interest rate" to 5%
             iaMortgagePaymentCalculatorPage.SetFieldValue(iaMortgagePaymentCalculatorPage.InterestRateField, "5.00");
 
             // Click the "Calculate" button
             iaMortgagePaymentCalculatorPage.SubmitItem(iaMortgagePaymentCalculatorPage.CalculateButton);
-            //Driver.FindElement(By.Id("btn_calculer")).Submit();
             
             //Wait that payment is visible
             iaMortgagePaymentCalculatorPage.WaitUntilElementTextHasChanged(iaMortgagePaymentCalculatorPage.EstimatedPayment, iaMortgagePaymentCalculatorPage.EstimatedPaymentAmount);
 
             //Verify that the weekly payments on the right hand side of the screen shows "$ 836.75"
-            Assert.AreEqual("$ 836.75", iaMortgagePaymentCalculatorPage.EstimatedPaymentAmount);
+            Assert.AreEqual(paymentAt5, iaMortgagePaymentCalculatorPage.EstimatedPaymentAmount);
 
             // Change the "Interest rate" to 3%
             iaMortgagePaymentCalculatorPage.SetFieldValue(iaMortgagePaymentCalculatorPage.InterestRateField, "3.00");
@@ -114,7 +115,7 @@ namespace MortgagePaymentCalculatorTest
             iaMortgagePaymentCalculatorPage.WaitUntilElementTextHasChanged(iaMortgagePaymentCalculatorPage.EstimatedPayment, iaMortgagePaymentCalculatorPage.EstimatedPaymentAmount);
 
             //Assert.IsTrue(weeklyPayment.Contains("$ 742.70"));
-            Assert.AreEqual("$ 732.70", iaMortgagePaymentCalculatorPage.EstimatedPaymentAmount);
+            Assert.AreEqual(paymentAt3, iaMortgagePaymentCalculatorPage.EstimatedPaymentAmount);
            
         }
 
